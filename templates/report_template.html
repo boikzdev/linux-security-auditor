@@ -1,1 +1,175 @@
+<!DOCTYPE html>
 
+<html>
+
+
+<head>
+
+
+<title>
+Linux Security Audit Report
+</title>
+
+
+
+<style>
+
+
+body{
+
+font-family:
+"Segoe UI",
+Arial;
+
+background:#f4f6f8;
+
+padding:40px;
+
+}
+
+
+
+.card{
+
+
+background:white;
+
+padding:20px;
+
+margin:20px;
+
+border-radius:10px;
+
+}
+
+
+
+.high{
+
+color:#d00000;
+
+}
+
+
+.medium{
+
+color:#ff8800;
+
+}
+
+
+
+.low{
+
+color:#228b22;
+
+}
+
+
+
+</style>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<h1>
+🔐 Linux Security Audit Report
+</h1>
+
+
+<div class="card">
+
+
+<h2>
+System
+</h2>
+
+
+{{ hostname }}
+
+<br>
+
+Generated:
+{{ date }}
+
+
+</div>
+
+
+
+<div class="card">
+
+
+<h2>
+Security Findings
+</h2>
+
+
+
+{% for item in findings %}
+
+
+<p>
+
+
+<b class="{{item.severity|lower}}">
+
+{{item.severity}}
+
+</b>
+
+
+:
+
+{{item.issue}}
+
+
+
+<br>
+
+
+Fix:
+
+{{item.fix}}
+
+
+</p>
+
+
+{% endfor %}
+
+
+
+</div>
+
+
+
+<div class="card">
+
+
+<h2>
+Security Score
+</h2>
+
+
+<h1>
+
+{{ score }}/100
+
+</h1>
+
+
+</div>
+
+
+
+</body>
+
+
+</html>
