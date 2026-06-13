@@ -1,1 +1,60 @@
+security_baseline:
 
+  ssh:
+
+    disable_root_login:
+      description: "Root login over SSH should be disabled"
+      severity: HIGH
+      remediation:
+        - "Edit /etc/ssh/sshd_config"
+        - "Set PermitRootLogin no"
+
+
+    password_authentication:
+      description: "Password authentication should be restricted"
+      severity: MEDIUM
+
+
+
+  firewall:
+
+    enabled:
+      description: "Host firewall must be enabled"
+      severity: HIGH
+
+
+  permissions:
+
+
+    world_writable:
+      description: "World writable files are dangerous"
+      severity: MEDIUM
+
+
+    suid_files:
+      description: "Unexpected SUID binaries"
+      severity: HIGH
+
+
+
+  services:
+
+
+    unnecessary_services:
+      description:
+        "Unused services increase attack surface"
+
+      severity:
+        MEDIUM
+
+
+
+  logging:
+
+
+    auditd:
+      description:
+        "Audit daemon should be running"
+
+      severity:
+        HIGH
