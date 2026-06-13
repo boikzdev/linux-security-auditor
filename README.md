@@ -131,10 +131,29 @@ linux-security-auditor/
 ├── templates/
 │   └── report_template.html    # Report HTML template
 │
-└── docs/
-    ├── USAGE.md                # Detailed usage guide
-    ├── HARDENING.md            # Hardening procedures
-    └── TROUBLESHOOTING.md      # FAQ & troubleshooting
+├──  docs/
+│   ├── USAGE.md                # Detailed usage guide
+│   ├── HARDENING.md            # Hardening procedures
+│   └── TROUBLESHOOTING.md      # FAQ & troubleshooting
+├── configs/
+│   ├── security_standards.yaml
+│   └── audit_profiles.yaml
+│
+├── templates/
+│   └── report_template.html
+│
+├── .github/
+│   └── workflows/
+│      └── security-audit.yml
+│
+├── Dockerfile
+│
+├── tests/
+│   ├── test_analyzer.py
+│   └── test_parser.py
+│
+├── Makefile
+
 ```
 
 ---
