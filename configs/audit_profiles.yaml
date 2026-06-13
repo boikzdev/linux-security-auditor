@@ -1,1 +1,39 @@
+profiles:
 
+
+  minimal:
+
+
+    checks:
+
+      - ssh
+      - firewall
+      - users
+
+
+
+  server:
+
+
+    checks:
+
+
+      - ssh
+      - firewall
+      - services
+      - permissions
+      - logging
+
+
+
+  cloud:
+
+
+    checks:
+
+
+      - ssh
+      - firewall
+      - ports
+      - permissions
+      - logging
