@@ -2,8 +2,12 @@ import json
 import argparse
 from datetime import datetime
 
+from jinja2 import Environment,FileSystemLoader
 
-parser = argparse.ArgumentParser()
+
+
+parser=argparse.ArgumentParser()
+
 
 
 parser.add_argument(
@@ -11,13 +15,15 @@ parser.add_argument(
 default="audit_results.json"
 )
 
+
 parser.add_argument(
 "--output",
-default="report.html"
+default="security_report.html"
 )
 
 
-args = parser.parse_args()
+
+args=parser.parse_args()
 
 
 
@@ -27,71 +33,60 @@ with open(args.audit_results) as f:
 
 
 
-html=f"""
-
-<html>
-
-<head>
-
-<title>
-Linux Security Audit Report
-</title>
-
-
-<style>
-
-body {{
-font-family:Arial;
-padding:30px;
-}}
-
-.high {{
-color:red;
-}}
-
-.medium {{
-color:orange;
-}}
-
-</style>
-
-
-</head>
+findings=[]
 
 
 
-<body>
+for section in data.values():
 
 
-<h1>
-Linux Security Audit Report
-</h1>
+    if isinstance(section,dict):
 
+        for item in section.get(
+        "checks",
+        []):
 
-<p>
-Generated:
-{datetime.now()}
-</p>
+            findings.append(item)
 
 
 
-<h2>
-Results
-</h2>
+score=100-(len(findings)*5)
 
 
-<pre>
+if score<0:
 
-{json.dumps(data,indent=4)}
-
-</pre>
+    score=0
 
 
-</body>
 
-</html>
+env=Environment(
+loader=FileSystemLoader(
+"templates"
+)
+)
 
-"""
+
+
+template=env.get_template(
+"report_template.html"
+)
+
+
+
+html=template.render(
+
+hostname=data.get(
+"hostname",
+"Unknown"
+),
+
+date=datetime.now(),
+
+findings=findings,
+
+score=score
+
+)
 
 
 
@@ -102,6 +97,6 @@ with open(args.output,"w") as f:
 
 
 print(
-"[+] Report generated:",
+"[+] Report created:",
 args.output
 )
